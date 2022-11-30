@@ -11,8 +11,8 @@ const login = async (req, res) => {
 };
 
 const newUser = async (req, res) => {
-  const { displayName, email, password, image } = req.body;
-  const result = await users.newUser(displayName, email, password, image);
+  const { name, email, password, image } = req.body;
+  const result = await users.newUser(name, email, password, image);
   if (result.type) {
     res.status(result.type).json({ message: result.message });
   } else {
