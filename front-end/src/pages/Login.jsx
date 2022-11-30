@@ -6,7 +6,7 @@ function Login() {
   // const [isDisabled, setIsDisabled] = useState(true);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  
+
   // const validateEmailAndSenha = () => {
   //   const regex = /\S+@\S+\.\S+/i;
   //   const MIN_LENGTH = 6;
