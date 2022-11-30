@@ -5,6 +5,10 @@ export const api = axios.create({
 });
 
 export const loginSubmit = async (body) => {
-  const result = await api.post('/users/login', body);
-  return result;
+  try {
+    const result = await api.post('/users/login', body);
+    return result;
+  } catch (err) {
+    return null;
+  }
 };

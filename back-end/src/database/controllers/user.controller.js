@@ -4,7 +4,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const result = await users.login(email, password);
   if (result.type) {
-    res.status(result.type).json({ message: result.message });
+    res.status(result.type).json({ hasToken: false });
   } else {
     res.status(200).json(result);
   }

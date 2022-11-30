@@ -1,5 +1,6 @@
 const { generateToken } = require('../../utils/jwt');
 const { User } = require('../models');
+const md5 = require('md5');
 
 const login = async (email, password) => {
   if (!email || !password) {
@@ -8,14 +9,16 @@ const login = async (email, password) => {
       message: 'Some required fields are missing',
     };
   }
-  const result = await User.findOne({ where: { email } });
-  if (!result || password !== result.password) {
+
+  const senha = md5(password);
+  const result = await User.findOne({ where: { email, password: senha } });
+  if (!result) {
     return {
-      type: 400,
-      message: 'Invalid fields',
+      type: 404,
+      hasToken: false,
     };
   }
-  const token = generateToken({ id: result.id });
+  const token = await generateToken({ id: result.id });
   return { token };
 };
   
@@ -26,7 +29,7 @@ const newUser = async (name, email, password) => {
   }
   await User.create({ name, email, password });
   const user = await User.findOne({ where: { email } });
-  const token = createToken({ id: user.id });
+  const token = await generateToken({ id: user.id });
   return { token };
 };
 
