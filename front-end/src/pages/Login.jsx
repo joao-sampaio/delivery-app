@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { loginSubmit } from '../service/requests';
 
 function Login() {
-  // const [invalid, setInvalid] = useState(false);
+  const [invalid, setInvalid] = useState(false);
   // const [isDisabled, setIsDisabled] = useState(true);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-
+  
   // const validateEmailAndSenha = () => {
   //   const regex = /\S+@\S+\.\S+/i;
   //   const MIN_LENGTH = 6;
@@ -41,7 +41,8 @@ function Login() {
       const result = await loginSubmit(body);
       console.log(result);
     } catch (err) {
-      console.log(err.message);
+      setInvalid(true);
+      // console.log(err.message);
     }
   };
 
