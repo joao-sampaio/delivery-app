@@ -27,7 +27,8 @@ const newUser = async (name, email, password) => {
   if (result) {
     return { type: 409, message: 'User already registered' };
   }
-  await User.create({ name, email, password });
+  const senha = md5(password);
+  await User.create({ name, email, password: senha, role: '' });
   const user = await User.findOne({ where: { email } });
   const token = await generateToken({ id: user.id });
   return { token };

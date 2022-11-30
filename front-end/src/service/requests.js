@@ -12,3 +12,12 @@ export const loginSubmit = async (body) => {
     return null;
   }
 };
+
+export const registerSubmit = async (body) => {
+  try {
+    const result = await api.post('/users/newuser', body);
+    return result;
+  } catch (err) {
+    return null;
+  }
+};
