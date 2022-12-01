@@ -5,8 +5,8 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  config.headers.Authorization = token || '';
+  const user = JSON.parse(localStorage.getItem('user'));
+  config.headers.Authorization = user ? user.token : '';
   return config;
 });
 
@@ -24,21 +24,6 @@ export const registerSubmit = async (body) => {
     const result = await api.post('/users/newuser', body);
     return result;
   } catch (err) {
-    return null;
-  }
-};
-
-export const getUser = async (token = null) => {
-  try {
-    let config;
-    if (token) {
-      config = {
-        headers: { Authorization: token },
-      };
-    }
-    const result = await api.get('/users/token', config);
-    return result;
-  } catch (error) {
     return null;
   }
 };

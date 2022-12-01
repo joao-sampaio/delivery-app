@@ -1,29 +1,22 @@
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useMemo, useState } from 'react';
-import { getUser } from '../service/requests';
 
 export const UserContext = createContext({});
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState({ user: {
-    id: 0,
-    name: '',
-    email: '',
-    role: '',
-  } });
-  const isAuthenticated = !!user;
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const userData = JSON.parse(localStorage.getItem('user'));
 
-    if (token) {
-      getUser().then((response) => setUser(response.data));
+    if (userData) {
+      setIsAuthenticated(true);
     }
   }, []);
 
   const value = useMemo(() => ({
-    user, isAuthenticated,
-  }), [user, isAuthenticated]);
+    isAuthenticated,
+  }), [isAuthenticated]);
 
   return (
     <UserContext.Provider value={ value }>

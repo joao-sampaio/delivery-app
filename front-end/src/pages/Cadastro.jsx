@@ -22,6 +22,7 @@ function Cadastro({ history }) {
     if (!result) {
       setInvalid(true);
     } else {
+      localStorage.setItem('user', JSON.stringify(result.data));
       history.push('/customer/products');
     }
   };

@@ -20,17 +20,7 @@ const newUser = async (req, res) => {
   }
 };
 
-const getUserById = async (_req, res) => {
-  const userId = res.locals.id;
-  const result = await users.getUserById(userId);
-  if ('type' in result) {
-    return res.status(result.type).json({ hasToken: result.hasToken });
-  }
-  res.status(200).json(result);
-};
-
 module.exports = {
   login,
   newUser,
-  getUserById,
 };

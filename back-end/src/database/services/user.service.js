@@ -19,7 +19,8 @@ const login = async (email, password) => {
     };
   }
   const token = await generateToken({ id: result.id });
-  return { token };
+  const { name, email, role } = result;
+  return { name, email, role, token };
 };
   
 const newUser = async (name, email, password) => {
@@ -29,24 +30,13 @@ const newUser = async (name, email, password) => {
   }
   const senha = md5(password);
   await User.create({ name, email, password: senha, role: '' });
-  const user = await User.findOne({ where: { email } });
+  const user = await User.findOne({ where: { email }, attributes: { exclude: ['password'] } });
   const token = await generateToken({ id: user.id });
-  return { token };
-};
-
-const getUserById = async (id) => {
-  const result = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
-  if (!result) {
-    return {
-      type: 404,
-      message: 'User not registered',
-    };
-  }
-  return result;
+  const { name, email, role } = user;
+  return { name, email, role, token };
 };
 
 module.exports = {
   login,
   newUser,
-  getUserById,
 };

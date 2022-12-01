@@ -1,27 +1,50 @@
-import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import { NavLink, useHistory } from 'react-router-dom';
 
 function Header() {
-  const { user: { name } } = useContext(UserContext);
+  const { name, role } = JSON.parse(localStorage.getItem('user'));
+  let navName = '';
+  let path = '';
+  switch (role) {
+  case 'seller':
+    navName = 'PEDIDOS';
+    path = '/seller/orders';
+    break;
+  case 'administrator':
+    navName = 'GERENCIAR USUÁRIOS';
+    path = '/admin/manage';
+    break;
+  default:
+    navName = 'MEUS PEDIDOS';
+    path = '/customer/orders';
+    break;
+  }
+
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
 
   return (
     <header>
       <ul>
+        { role === 'customer' && (
+          <li>
+            <NavLink
+              to="/customer/products"
+              data-testid="customer_products__element-navbar-link-products"
+            >
+              <h2>PRODUTOS</h2>
+            </NavLink>
+          </li>
+        ) }
         <li>
           <NavLink
-            to="/customer/products"
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            <h2>PRODUTOS</h2>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="customer/orders"
+            to={ path }
             data-testid="customer_products__element-navbar-link-orders"
           >
-            <h2>MEUS PEDIDOS</h2>
+            <h2>{ navName }</h2>
           </NavLink>
         </li>
         <li>
@@ -33,7 +56,7 @@ function Header() {
           <button
             data-testid="customer_products__element-navbar-link-logout"
             type="button"
-            onClick={ () => null }
+            onClick={ logout }
           >
             Sair
           </button>
