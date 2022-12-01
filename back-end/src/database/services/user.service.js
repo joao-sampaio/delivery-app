@@ -11,7 +11,7 @@ const login = async (email, password) => {
   }
 
   const senha = md5(password);
-  const result = await User.findOne({ where: { email, password: senha } });
+  const result = await User.findOne({ where: { email, password: senha }, attributes: { exclude: ['password'] } });
   if (!result) {
     return {
       type: 404,
@@ -34,7 +34,19 @@ const newUser = async (name, email, password) => {
   return { token };
 };
 
+const getUserById = async (id) => {
+  const result = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
+  if (!result) {
+    return {
+      type: 404,
+      message: 'User not registered',
+    };
+  }
+  return result;
+};
+
 module.exports = {
   login,
   newUser,
+  getUserById,
 };

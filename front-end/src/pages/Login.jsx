@@ -27,6 +27,7 @@ function Login({ history }) {
     if (!result) {
       setInvalid(true);
     } else {
+      localStorage.setItem('token', result.data.token);
       history.push('/customer/products');
     }
   };
