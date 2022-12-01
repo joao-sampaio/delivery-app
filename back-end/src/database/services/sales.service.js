@@ -14,8 +14,7 @@ const getByIdSales = async (id) => {
     where: { id },
     include: [{ model: Product, as: 'products' }],
   });
-  const seller = await User.findPk(sale.sellerId);
-  return seller;
+  return sale;
 };
 
 module.exports = {
