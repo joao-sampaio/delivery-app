@@ -27,3 +27,21 @@ export const registerSubmit = async (body) => {
     return null;
   }
 };
+
+export const getAllSales = async () => {
+  try {
+    const { data } = await api.get('/sales');
+    return data;
+  } catch (err) {
+    return [];
+  }
+};
+
+export const getSaleById = async (id) => {
+  try {
+    const { data } = await api.get(`/sales/${id}`);
+    return data;
+  } catch (err) {
+    return [];
+  }
+};
