@@ -19,7 +19,7 @@ const login = async (email, password) => {
     };
   }
   const token = await generateToken({ id: result.id });
-  const { name, email, role } = result;
+  const { name, role } = result;
   return { name, email, role, token };
 };
   
@@ -32,7 +32,7 @@ const newUser = async (name, email, password) => {
   await User.create({ name, email, password: senha, role: '' });
   const user = await User.findOne({ where: { email }, attributes: { exclude: ['password'] } });
   const token = await generateToken({ id: user.id });
-  const { name, email, role } = user;
+  const { role } = user;
   return { name, email, role, token };
 };
 
