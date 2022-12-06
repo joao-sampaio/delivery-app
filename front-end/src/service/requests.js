@@ -12,8 +12,8 @@ api.interceptors.request.use((config) => {
 
 export const getProducts = async (body) => {
   try {
-    const result = await api.post('/products/', body);
-    return result;
+    const result = await api.get('/products', body);
+    return result.data;
   } catch (err) {
     return [];
   }
