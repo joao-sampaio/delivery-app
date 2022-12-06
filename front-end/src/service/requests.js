@@ -54,3 +54,12 @@ export const getSaleById = async (id) => {
     return [];
   }
 };
+
+export const updateStatusSale = async (status, id) => {
+  try {
+    const { data } = await api.put(`/sales/${id}`, { status });
+    return data;
+  } catch (err) {
+    return null;
+  }
+};

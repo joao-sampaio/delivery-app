@@ -12,7 +12,14 @@ const getSaleById = async (req, res) => {
   res.status(200).json(result);
 }
 
+const updateStatus = async (req, res) => {
+  const { id } = req.params;
+  const updateResult = await sales.updateSale(req.body.status, id);
+  res.status(200).json(updateResult);
+}
+
 module.exports = {
   getAllSales,
-  getSaleById
+  getSaleById,
+  updateStatus
 }

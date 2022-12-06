@@ -12,7 +12,7 @@ module.exports = {
         delivery_address: 'Qualquer um',
         delivery_number: 87,
         sale_date: '2022-12-01',
-        status: 'pendente'
+        status: 'Pendente'
       },
     ])
   },

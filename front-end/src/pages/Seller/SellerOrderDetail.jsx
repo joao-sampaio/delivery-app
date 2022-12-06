@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
 import ProductCardDetail from '../../components/ProductCardDetail';
-import { getSaleById } from '../../service/requests';
+import { getSaleById, updateStatusSale } from '../../service/requests';
 
 const TEST_ID_GIG = 'seller_order_details__element-order-details-label-delivery-status';
 
@@ -18,6 +18,12 @@ function SellerOrdersDetails() {
 
     getData();
   }, [id]);
+
+  const updateSale = async (status) => {
+    await updateStatusSale(status, id);
+    const data = await getSaleById(id);
+    setOrder(data);
+  };
 
   return (
     <>
@@ -39,11 +45,18 @@ function SellerOrdersDetails() {
           </p>
           <button
             type="button"
+            disabled={ order.status !== 'Pendente' }
+            onClick={ async () => updateSale('Preparando') }
             data-testid="seller_order_details__button-preparing-check"
           >
             Preparar pedido
           </button>
-          <button type="button" data-testid="seller_order_details__button-dispatch-check">
+          <button
+            type="button"
+            data-testid="seller_order_details__button-dispatch-check"
+            onClick={ async () => updateSale('Em trânsito') }
+            disabled={ order.status !== 'Preparando' }
+          >
             Saiu para entrega
           </button>
           {

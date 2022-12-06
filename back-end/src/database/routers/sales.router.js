@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.get('/', authMiddleware, saleController.getAllSales);
 router.get('/:id', saleController.getSaleById);
+router.put('/:id', saleController.updateStatus);
 
 module.exports = router;
