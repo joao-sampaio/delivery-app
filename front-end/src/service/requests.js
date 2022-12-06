@@ -10,6 +10,15 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+export const getProducts = async (body) => {
+  try {
+    const result = await api.get('/products', body);
+    return result.data;
+  } catch (err) {
+    return [];
+  }
+};
+
 export const loginSubmit = async (body) => {
   try {
     const result = await api.post('/users/login', body);

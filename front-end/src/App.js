@@ -16,9 +16,6 @@ function App() {
       <Switch>
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Cadastro } />
-        {
-          // requisito do gabriel
-        }
         <Route path="/customer/orders/:id" />
         <Route path="/seller/orders/:id" component={ SellerOrdersDetails } />
         <Route path="/customer/orders" component={ CustomerOrders } />
