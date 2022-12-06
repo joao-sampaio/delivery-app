@@ -3,7 +3,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { UserProvider } from './context/UserContext';
 import Cadastro from './pages/Cadastro';
-import Products from './pages/Products';
 import Checkout from './pages/Checkout';
 import CustomerOrders from './pages/Customer/CustomerOrders';
 import Login from './pages/Login';
