@@ -28,6 +28,7 @@ function Login({ history }) {
       setInvalid(true);
     } else {
       localStorage.setItem('user', JSON.stringify(result.data));
+      if (result.data.role === 'seller') return history.push('/seller/orders');
       history.push('/customer/products');
     }
   };
