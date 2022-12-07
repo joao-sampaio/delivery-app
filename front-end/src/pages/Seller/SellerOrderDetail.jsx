@@ -55,7 +55,7 @@ function SellerOrdersDetails() {
           <button
             type="button"
             data-testid="seller_order_details__button-dispatch-check"
-            onClick={ async () => updateSale('Em trânsito') }
+            onClick={ async () => updateSale('Em Trânsito') }
             disabled={ order.status !== 'Preparando' }
           >
             Saiu para entrega
@@ -69,10 +69,13 @@ function SellerOrdersDetails() {
                   item={ index + 1 }
                 />))
           }
-          <p datat-testid="seller_order_details__element-order-total-price">
+          <p>
+            {' '}
             TOTAL: R$
             {' '}
-            {order.totalPrice}
+            <span data-testid="seller_order_details__element-order-total-price">
+              {order.totalPrice.replace(/\./, ',')}
+            </span>
           </p>
         </main>
       )}
