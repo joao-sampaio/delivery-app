@@ -1,4 +1,3 @@
-// OLHAR SE OS OBJETOS VEM EM CAMEL CASE
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +9,7 @@ function CardSale({ id,
     <Link to={ `/${role}/orders/${id}` }>
       <section>
         <p data-testid={ `${role}_orders__element-order-id-${id}` }>{id}</p>
-        <p data-testid={ `${role}_orders__element-delivery-status${id}` }>{status}</p>
+        <p data-testid={ `${role}_orders__element-delivery-status-${id}` }>{status}</p>
         <p data-testid={ `${role}_orders__element-order-date-${id}` }>{saleDate}</p>
         <p data-testid={ `${role}_orders__element-card-price-${id}` }>{totalPrice}</p>
         <p data-testid={ `${role}_orders__element-card-address-${id}` }>
