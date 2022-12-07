@@ -20,7 +20,13 @@ const newUser = async (req, res) => {
   }
 };
 
+const getAllSellers = async (_req, res) => {
+  const sellersList = await users.getAllSellers();
+  res.status(200).json(sellersList);
+};
+
 module.exports = {
   login,
   newUser,
+  getAllSellers,
 };

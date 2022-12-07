@@ -18,8 +18,14 @@ const updateStatus = async (req, res) => {
   res.status(200).json(updateResult);
 }
 
+const registerSale = async (req, res) => {
+  const newSale = await sales.registerSale(req.body);
+  res.status(201).json(newSale);
+}
+
 module.exports = {
   getAllSales,
   getSaleById,
-  updateStatus
+  updateStatus,
+  registerSale,
 }

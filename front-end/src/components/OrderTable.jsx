@@ -1,7 +1,14 @@
-function OrderTable() {
+import PropTypes from 'prop-types';
+
+function OrderTable({ productsList, setProductsList, totalPrice }) {
+  const removeProduct = (id) => {
+    const newCart = productsList.filter((product) => product.id !== id);
+    setProductsList(newCart);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+  };
+
   return (
     <>
-      <h1>Finalizar Pedido</h1>
       <table>
         <thead>
           <tr>
@@ -14,44 +21,44 @@ function OrderTable() {
           </tr>
         </thead>
         <tbody>
-          { [].map((product, index) => (
+          { productsList.map((product, index) => (
             <tr key={ product.id }>
               <td
                 data-testid={
                   `customer_checkout__element-order-table-item-number-${index}`
                 }
               >
-                index
+                {index + 1}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-name-${index}` }
               >
-                name
+                {product.name}
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
               >
-                quantity
+                {product.quantity}
               </td>
               <td
                 data-testid={
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                price
+                {product.price.toFixed(2).replace('.', ',')}
               </td>
               <td
                 data-testid={
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                price * quantity
+                {product.subtotal.toFixed(2).replace('.', ',')}
               </td>
               <td>
                 <button
                   data-testid={ `customer_checkout__element-order-table-remove-${index}` }
                   type="button"
-                  onClick={ () => null }
+                  onClick={ () => removeProduct(product.id) }
                 >
                   Remover
                 </button>
@@ -59,9 +66,24 @@ function OrderTable() {
             </tr>)) }
         </tbody>
       </table>
-      <p data-testid="customer_checkout__element-order-total-price">Total: R$</p>
+      <p data-testid="customer_checkout__element-order-total-price">
+        {`Total: R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
+      </p>
     </>
   );
 }
+
+OrderTable.propTypes = {
+  productsList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    quantity: PropTypes.number,
+    subtotal: PropTypes.number,
+    urlImage: PropTypes.string,
+  })).isRequired,
+  setProductsList: PropTypes.func.isRequired,
+  totalPrice: PropTypes.number.isRequired,
+};
 
 export default OrderTable;

@@ -4,11 +4,8 @@ import Header from '../components/Header';
 import { getProducts } from '../service/requests';
 
 function Products() {
-  // let products = [];
   const history = useHistory();
-  localStorage.setItem('cart', JSON.stringify({}));
-  // const getCart = () => JSON.parse(localStorage.getItem('cart'));
-  const [itemQuantities, setItemQuantites] = useState({});
+  const [itemQuantities, setItemQuantities] = useState({});
   const [products, setProducts] = useState([]);
   const getP = async () => {
     if (products.length === 0) {
@@ -19,16 +16,14 @@ function Products() {
   const add = (i) => {
     const temp = { ...itemQuantities };
     temp[i] = temp[i] ? temp[i] + 1 : 1;
-    setItemQuantites(temp);
-    localStorage.setItem('cart', JSON.stringify(temp));
+    setItemQuantities(temp);
   };
   const remove = (i) => {
     const temp = { ...itemQuantities };
     if (temp[i] && temp[i] > 0) {
       temp[i] -= 1;
     }
-    setItemQuantites(temp);
-    localStorage.setItem('cart', JSON.stringify(temp));
+    setItemQuantities(temp);
   };
 
   const getTotalPrice = () => {
@@ -42,23 +37,21 @@ function Products() {
     return temp;
   };
 
-  const changeQuantitie = (event) => {
+  const changeQuantity = (event) => {
     const { id, value } = event.target;
-    // const key = event.target.getAttribute('key');
     const temp = { ...itemQuantities };
     temp[id] = value ? parseInt(value, 10) : 0;
-    setItemQuantites(temp);
-    localStorage.setItem('cart', JSON.stringify(temp));
+    setItemQuantities(temp);
   };
 
   const handleClick = () => {
-    console.log(products);
-    console.log(itemQuantities);
     const temp = Object.entries(itemQuantities).map((i) => {
       const index = parseInt(i[0], 10);
       return { ...products[index],
         quantity: i[1],
-        subtotal: parseFloat(products[index].price) * i[1] };
+        subtotal: parseFloat(products[index].price) * i[1],
+        price: Number(products[index].price),
+      };
     });
     localStorage.setItem('cart', JSON.stringify(temp));
     history.push('/customer/checkout');
@@ -104,7 +97,7 @@ function Products() {
                   id={ i }
                   type="number"
                   data-testid={ `customer_products__input-card-quantity-${p.id}` }
-                  onChange={ changeQuantitie }
+                  onChange={ changeQuantity }
                   value={ itemQuantities[i] ? itemQuantities[i] : 0 }
                 />
 
