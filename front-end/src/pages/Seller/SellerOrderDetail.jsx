@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -36,7 +37,7 @@ function SellerOrdersDetails() {
             {order.id}
           </p>
           <p data-testid="seller_order_details__element-order-details-label-order-date">
-            {order.saleDate}
+            {moment(order.saleDate).format('DD/MM/YYYY')}
           </p>
           <p
             data-testid={ TEST_ID_GIG }

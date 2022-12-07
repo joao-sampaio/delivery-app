@@ -60,11 +60,11 @@ function CustomerOrdersDetails() {
               `${prefix}__element-order-details-label-delivery-status`
             }
           >
-            {(order.status).toUpperCase()}
+            {order.status}
           </p>
           <button
             type="button"
-            disabled={ order.status === 'Entregue' }
+            disabled={ order.status !== 'Em Trânsito' }
             onClick={ async () => updateSale('Entregue') }
             data-testid={ `${prefix}__button-delivery-check` }
           >
