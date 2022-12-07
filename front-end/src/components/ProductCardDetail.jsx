@@ -22,12 +22,12 @@ function ProductCardDetail({ item, name, price, SaleProduct: { quantity } }) {
       <p
         data-testid={ `${role}_order_details__element-order-table-unit-price-${item}` }
       >
-        {price}
+        {price.replace(/\./, ',')}
       </p>
       <p
         data-testid={ `${role}_order_details__element-order-table-sub-total-${item}` }
       >
-        {(price * quantity).toFixed(2)}
+        {(price * quantity).toFixed(2).replace(/\./, ',')}
       </p>
     </section>
   );

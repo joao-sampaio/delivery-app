@@ -4,6 +4,7 @@ import './App.css';
 import { UserProvider } from './context/UserContext';
 import Cadastro from './pages/Cadastro';
 import Checkout from './pages/Checkout';
+import CustomerOrdersDetails from './pages/Customer/CustomerOrderDetail';
 import CustomerOrders from './pages/Customer/CustomerOrders';
 import Login from './pages/Login';
 import Products from './pages/Products';
@@ -16,7 +17,7 @@ function App() {
       <Switch>
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Cadastro } />
-        <Route path="/customer/orders/:id" />
+        <Route path="/customer/orders/:id" component={ CustomerOrdersDetails } />
         <Route path="/seller/orders/:id" component={ SellerOrdersDetails } />
         <Route path="/customer/orders" component={ CustomerOrders } />
         <Route path="/seller/orders" component={ SellerOrders } />

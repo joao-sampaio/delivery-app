@@ -63,3 +63,21 @@ export const updateStatusSale = async (status, id) => {
     return null;
   }
 };
+
+export const getAllSellers = async () => {
+  try {
+    const { data } = await api.get('/users/sellers');
+    return data;
+  } catch (err) {
+    return null;
+  }
+};
+
+export const registerSale = async (orderDetail) => {
+  try {
+    const { data } = await api.post('/sales', orderDetail);
+    return data;
+  } catch (err) {
+    return null;
+  }
+};
