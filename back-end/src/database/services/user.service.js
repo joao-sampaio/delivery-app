@@ -15,14 +15,14 @@ const login = async (email, password) => {
   if (!result) {
     return {
       type: 404,
-      hasToken: false,
+      message: 'User not found',
     };
   }
   const token = await generateToken({ id: result.id });
   const { name, role } = result;
   return { name, email, role, token };
 };
-  
+
 const newUser = async (name, email, password) => {
   const result = await User.findOne({ where: { email } });
   if (result) {
