@@ -38,7 +38,7 @@ describe('Sales camada service', function () {
     sinon.stub(User, 'findOne').resolves(usersList[2]);
     sinon.stub(Sales, 'create').resolves(salesList[0]);
     sinon.stub(SaleProduct, 'bulkCreate').resolves(salesProducts);
-    sequelize.transaction = sinon.stub().callsFake(async (callback) => callback());
+    sinon.stub(sequelize, 'transaction').yields();
     // Act
     const result = await sales.registerSale(newOrder);
     // Assert
