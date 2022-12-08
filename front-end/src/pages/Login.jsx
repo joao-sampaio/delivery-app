@@ -1,11 +1,20 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { loginSubmit } from '../service/requests';
 
 function Login({ history }) {
   const [invalid, setInvalid] = useState(false);
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+
+    if (userData) {
+      if (userData.role === 'seller') return history.push('/seller/orders');
+      history.push('/customer/products');
+    }
+  }, [history]);
 
   const isDisabled = () => {
     const regex = /\S+@\S+\.\S+/i;
