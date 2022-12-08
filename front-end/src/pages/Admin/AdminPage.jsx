@@ -1,0 +1,83 @@
+import { useState } from 'react';
+import Header from '../../components/Header';
+import { registerSubmit } from '../../service/requests';
+
+function AdminPage() {
+  const [invalid, setInvalid] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('customer');
+
+  const isDisabled = () => {
+    const regex = /\S+@\S+\.\S+/i;
+    const MIN_LENGTH = 6;
+    const MIN_LENGTH_NAME = 12;
+    return !(regex.test(email)
+    && password.length >= MIN_LENGTH && name.length >= MIN_LENGTH_NAME);
+  };
+
+  const handleSubmit = async () => {
+    const body = { email, password, name, role };
+    const result = await registerSubmit(body);
+    if (!result) {
+      setInvalid(true);
+    }
+  };
+
+  return (
+    <>
+      <Header />
+      <form>
+        <h2>Cadastrar novo usuário</h2>
+        {
+          invalid && (
+            <p data-testid="admin_manage__element-invalid-register">
+              Já existe um usuário usando esse endereço de email
+            </p>
+          )
+        }
+        <input
+          data-testid="admin_manage__input-name"
+          type="text"
+          placeholder="nome"
+          value={ name }
+          onChange={ (event) => setName(event.target.value) }
+        />
+        <input
+          data-testid="admin_manage__input-email"
+          type="email"
+          placeholder="email"
+          value={ email }
+          onChange={ (event) => setEmail(event.target.value) }
+        />
+        <input
+          data-testid="admin_manage__input-password"
+          type="password"
+          placeholder="password"
+          value={ password }
+          onChange={ (event) => setPassword(event.target.value) }
+        />
+        <select
+          data-testid="admin_manage__select-role"
+          value={ role }
+          onChange={ (event) => setRole(event.target.value) }
+        >
+          <option value="seller">Vendedor</option>
+          <option value="admin">Administrador</option>
+          <option value="customer">Cliente</option>
+        </select>
+        <button
+          type="button"
+          disabled={ isDisabled() }
+          onClick={ handleSubmit }
+          data-testid="admin_manage__button-register"
+        >
+          Cadastrar
+        </button>
+      </form>
+    </>
+  );
+}
+
+export default AdminPage;

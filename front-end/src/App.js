@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { UserProvider } from './context/UserContext';
+import AdminPage from './pages/Admin/AdminPage';
 import Cadastro from './pages/Cadastro';
 import Checkout from './pages/Checkout';
 import CustomerOrdersDetails from './pages/Customer/CustomerOrderDetail';
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route path="/login" component={ Login } />
         <Route path="/register" component={ Cadastro } />
+        <Route path="/admin/manage" component={ AdminPage } />
         <Route path="/customer/orders/:id" component={ CustomerOrdersDetails } />
         <Route path="/seller/orders/:id" component={ SellerOrdersDetails } />
         <Route path="/customer/orders" component={ CustomerOrders } />
