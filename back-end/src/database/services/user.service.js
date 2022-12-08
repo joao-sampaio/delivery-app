@@ -15,7 +15,7 @@ const login = async (email, password) => {
   if (!result) {
     return {
       type: 404,
-      hasToken: false,
+      message: 'User not found',
     };
   }
   const token = await generateToken({ id: result.id });
@@ -40,8 +40,20 @@ const getAllSellers = async () => {
   return result;
 };
 
+const getAll = async () => {
+  const result = await User.findAll();
+  return result;
+}
+
+const deleteByEmail = async (email) => {
+  const delet = await User.destroy({ where: { email } });
+  return delet;
+}
+
 module.exports = {
   login,
   newUser,
+  getAll,
   getAllSellers,
+  deleteByEmail,
 };

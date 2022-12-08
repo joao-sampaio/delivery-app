@@ -24,8 +24,20 @@ const getAllSellers = async (_req, res) => {
   res.status(200).json(sellersList);
 };
 
+const getAll = async (_req, res) => {
+  const usersList = await users.getAll();
+  res.status(200).json(usersList);
+}
+
+const deleteByEmail = async (req, res) => {
+  const delet = await users.deleteByEmail(req.body.email);
+  res.status(200).json(delet);
+}
+
 module.exports = {
   login,
   newUser,
   getAllSellers,
+  getAll,
+  deleteByEmail,
 };
