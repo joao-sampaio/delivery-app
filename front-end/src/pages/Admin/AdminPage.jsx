@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../../components/Header';
-import { registerSubmit } from '../../service/requests';
+import UserInfo from '../../components/UserInfo';
+import { deleteUser, getAllUsers, registerSubmit } from '../../service/requests';
 
 function AdminPage() {
+  const [users, setUsers] = useState([]);
   const [invalid, setInvalid] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('customer');
 
+  useEffect(() => {
+    const requisition = async () => {
+      const info = await getAllUsers();
+      setUsers(info);
+    };
+
+    requisition();
+  });
+
   const isDisabled = () => {
     const regex = /\S+@\S+\.\S+/i;
     const MIN_LENGTH = 6;
     const MIN_LENGTH_NAME = 12;
     return !(regex.test(email)
-    && password.length >= MIN_LENGTH && name.length >= MIN_LENGTH_NAME);
+      && password.length >= MIN_LENGTH && name.length >= MIN_LENGTH_NAME);
   };
 
   const handleSubmit = async () => {
@@ -22,6 +33,14 @@ function AdminPage() {
     const result = await registerSubmit(body);
     if (!result) {
       setInvalid(true);
+    }
+  };
+
+  const handleDelete = async (mail) => {
+    const funcdelete = await deleteUser(mail);
+    if (funcdelete) {
+      const info = await getAllUsers();
+      setUsers(info);
     }
   };
 
@@ -76,6 +95,21 @@ function AdminPage() {
           Cadastrar
         </button>
       </form>
+      <section>
+        <h3>Lista de Usuários</h3>
+        {
+          users && (
+            users.map((user, index) => (
+              <UserInfo
+                key={ user.email }
+                item={ index }
+                handleDelete={ async () => handleDelete(user.email) }
+                { ...user }
+              />
+            ))
+          )
+        }
+      </section>
     </>
   );
 }
