@@ -23,16 +23,15 @@ const login = async (email, password) => {
   return { name, email, role, token };
 };
 
-const newUser = async (name, email, password) => {
+const newUser = async ({name, email, password, role = 'customer'}) => {
   const result = await User.findOne({ where: { email } });
   if (result) {
     return { type: 409, message: 'User already registered' };
   }
   const senha = md5(password);
-  await User.create({ name, email, password: senha, role: '' });
+  await User.create({ name, email, password: senha, role });
   const user = await User.findOne({ where: { email }, attributes: { exclude: ['password'] } });
   const token = await generateToken({ id: user.id });
-  const { role } = user;
   return { name, email, role, token };
 };
 
@@ -41,8 +40,20 @@ const getAllSellers = async () => {
   return result;
 };
 
+const getAll = async () => {
+  const result = await User.findAll();
+  return result;
+}
+
+const deleteByEmail = async (email) => {
+  const delet = await User.destroy({ where: { email } });
+  return delet;
+}
+
 module.exports = {
   login,
   newUser,
+  getAll,
   getAllSellers,
+  deleteByEmail,
 };
