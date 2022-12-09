@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { loginSubmit } from '../service/requests';
+import '../App.css';
+import can1 from '../images/can1.svg';
+import can2 from '../images/can2.svg';
 
 function Login({ history }) {
   const [invalid, setInvalid] = useState(false);
@@ -43,44 +46,58 @@ function Login({ history }) {
   };
 
   return (
-    <form>
-      <input
-        data-testid="common_login__input-email"
-        type="email"
-        placeholder="email"
-        value={ email }
-        onChange={ (event) => changeEmail(event.target.value) }
-      />
-      <input
-        data-testid="common_login__input-password"
-        type="password"
-        placeholder="password"
-        value={ senha }
-        onChange={ (event) => changeSenha(event.target.value) }
-      />
-      <button
-        type="button"
-        onClick={ handleSubmit }
-        disabled={ isDisabled() }
-        data-testid="common_login__button-login"
-      >
-        Login
-      </button>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-        onClick={ () => history.push('/register') }
-      >
-        Ainda não tenho conta
-      </button>
-      {
-        invalid && (
-          <div data-testid="common_login__element-invalid-email">
-            Email ou senha inválidos
-          </div>
-        )
-      }
-    </form>
+    <div className='App'>
+      <span className="logo">PLACEHOLDER</span>
+      
+      <div className="imagesContainer">
+        <img className="can1" src={can1}/>
+        <img className="can2" src={can2}/>
+      </div>
+      <form className="login_form">
+        <input
+          data-testid="common_login__input-email"
+          type="email"
+          placeholder="email"
+          value={ email }
+          onChange={ (event) => changeEmail(event.target.value) }
+          className="login_input"
+        />
+        <input
+          data-testid="common_login__input-password"
+          type="password"
+          placeholder="password"
+          value={ senha }
+          onChange={ (event) => changeSenha(event.target.value) }
+          className="login_input"
+        />
+        {/* <div className="login_input"> */}
+        <button
+          type="button"
+          onClick={ handleSubmit }
+          disabled={ isDisabled() }
+          data-testid="common_login__button-login"
+          className="login_button"
+        >
+          Login
+        </button>
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+          onClick={ () => history.push('/register') }
+          className="login_button"
+        >
+          Ainda não tenho conta
+        </button>
+        {/* </div> */}
+        {
+          invalid && (
+            <div data-testid="common_login__element-invalid-email">
+              Email ou senha inválidos
+            </div>
+          )
+        }
+      </form>
+    </div>
   );
 }
 
