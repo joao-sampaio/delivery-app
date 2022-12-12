@@ -81,3 +81,21 @@ export const registerSale = async (orderDetail) => {
     return null;
   }
 };
+
+export const getAllUsers = async () => {
+  try {
+    const { data } = await api.get('/users');
+    return data;
+  } catch (err) {
+    return null;
+  }
+};
+
+export const deleteUser = async (email) => {
+  try {
+    const { data } = await api.delete('/users', { data: { email } });
+    return data;
+  } catch (err) {
+    return null;
+  }
+};
