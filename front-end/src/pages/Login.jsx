@@ -46,12 +46,12 @@ function Login({ history }) {
   };
 
   return (
-    <div className='App'>
+    <div className="App">
       <span className="logo">PLACEHOLDER</span>
-      
+
       <div className="imagesContainer">
-        <img className="can1" src={can1}/>
-        <img className="can2" src={can2}/>
+        <img className="can1" src={ can1 } />
+        <img className="can2" src={ can2 } />
       </div>
       <form className="login_form">
         <input
