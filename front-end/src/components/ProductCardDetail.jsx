@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 function ProductCardDetail({ item, name, price, SaleProduct: { quantity } }) {
   const { role } = JSON.parse(localStorage.getItem('user'));
   return (
-    <section>
+    <section className="users_card">
       <p
         data-testid={ `${role}_order_details__element-order-table-item-number-${item}` }
       >

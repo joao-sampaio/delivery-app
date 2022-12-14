@@ -63,6 +63,7 @@ function Login({ history }) {
           value={ email }
           onChange={ (event) => changeEmail(event.target.value) }
           className="login_input"
+          autoComplete="email"
         />
         <input
           data-testid="common_login__input-password"
@@ -71,6 +72,7 @@ function Login({ history }) {
           value={ senha }
           onChange={ (event) => changeSenha(event.target.value) }
           className="login_input"
+          autoComplete="current-password"
         />
         {/* <div className="login_input"> */}
         <button

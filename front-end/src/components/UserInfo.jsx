@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 
-const roles = { administrator: 'adm', seller: 'seller', customer: 'customer' };
+const roles = { administrator: 'adm',
+  admin: 'adm',
+  seller: 'seller',
+  customer: 'customer' };
 function UserInfo({ name, email, role, item, handleDelete }) {
   // const classN = "user_card" + roles[role]
   return (
