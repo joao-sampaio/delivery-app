@@ -58,21 +58,17 @@ function Products() {
   };
 
   return (
-    <>
+    <div className="products_page">
       <Header />
-      <div>
+      <div className="products_container">
         {products.map((p, i) => {
           const price = p.price.replace('.', ',');
           return (
             <div
               key={ i }
+              className="products_card"
             >
-              <div>
-                <p
-                  data-testid={ `customer_products__element-card-price-${p.id}` }
-                >
-                  {price}
-                </p>
+              <div className="products_container_top">
                 <p
                   data-testid={ `customer_products__element-card-title-${p.id}` }
                 >
@@ -84,8 +80,13 @@ function Products() {
                   data-testid={ `customer_products__img-card-bg-image-${p.id}` }
                   src={ p.urlImage }
                 />
+                <p
+                  data-testid={ `customer_products__element-card-price-${p.id}` }
+                >
+                  {price}
+                </p>
               </div>
-              <div>
+              <div className="products_container_panel">
                 <button
                   type="button"
                   onClick={ () => remove(i) }
@@ -112,21 +113,23 @@ function Products() {
             </div>
           );
         })}
-        <button
-          type="button"
-          data-testid="customer_products__button-cart"
-          disabled={ getTotalPrice() === '0,00' }
-          onClick={ handleClick }
-        >
-          <p>Ver Carrinho: R$ </p>
-          <p
-            data-testid="customer_products__checkout-bottom-value"
-          >
-            { getTotalPrice() }
-          </p>
-        </button>
       </div>
-    </>
+
+      <button
+        type="button"
+        data-testid="customer_products__button-cart"
+        disabled={ getTotalPrice() === '0,00' }
+        onClick={ handleClick }
+        className="products_button"
+      >
+        <p>Ver Carrinho: R$ </p>
+        <p
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          { getTotalPrice() }
+        </p>
+      </button>
+    </div>
   );
 }
 

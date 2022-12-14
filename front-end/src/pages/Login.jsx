@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { loginSubmit } from '../service/requests';
 import '../App.css';
-import can1 from '../images/can1.svg';
-import can2 from '../images/can2.svg';
+// import can1 from '../images/can1.svg';
+// import can2 from '../images/can2.svg';
 
 function Login({ history }) {
   const [invalid, setInvalid] = useState(false);
@@ -51,10 +51,10 @@ function Login({ history }) {
     <div className="App">
       <span className="logo">PLACEHOLDER</span>
 
-      <div className="imagesContainer">
-        <img className="can1" src={ can1 } />
-        <img className="can2" src={ can2 } />
-      </div>
+      {/* <div className="imagesContainer">
+        <img className="can1" src={ can1 } alt="can1" />
+        <img className="can2" src={ can2 } alt="can2" />
+      </div> */}
       <form className="login_form">
         <input
           data-testid="common_login__input-email"
@@ -86,7 +86,7 @@ function Login({ history }) {
           type="button"
           data-testid="common_login__button-register"
           onClick={ () => history.push('/register') }
-          className="login_button"
+          className="header_button"
         >
           Ainda não tenho conta
         </button>

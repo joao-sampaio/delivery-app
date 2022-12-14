@@ -28,45 +28,51 @@ function Cadastro({ history }) {
   };
 
   return (
-    <form>
-      <h1>Cadastro</h1>
-      <input
-        data-testid="common_register__input-name"
-        type="text"
-        placeholder="nome"
-        value={ name }
-        onChange={ (event) => setName(event.target.value) }
-      />
-      <input
-        data-testid="common_register__input-email"
-        type="email"
-        placeholder="email"
-        value={ email }
-        onChange={ (event) => setEmail(event.target.value) }
-      />
-      <input
-        data-testid="common_register__input-password"
-        type="password"
-        placeholder="password"
-        value={ password }
-        onChange={ (event) => setPassword(event.target.value) }
-      />
-      <button
-        type="button"
-        disabled={ isDisabled() }
-        onClick={ handleSubmit }
-        data-testid="common_register__button-register"
-      >
-        Cadastrar
-      </button>
-      {
-        invalid && (
-          <div data-testid="common_register__element-invalid_register">
-            Email ou senha inválidos
-          </div>
-        )
-      }
-    </form>
+    <div className="App">
+      <form className="login_form">
+        <span>Cadastro</span>
+        <input
+          data-testid="common_register__input-name"
+          type="text"
+          placeholder="nome"
+          value={ name }
+          onChange={ (event) => setName(event.target.value) }
+          className="login_input"
+        />
+        <input
+          data-testid="common_register__input-email"
+          type="email"
+          placeholder="email"
+          value={ email }
+          onChange={ (event) => setEmail(event.target.value) }
+          className="login_input"
+        />
+        <input
+          data-testid="common_register__input-password"
+          type="password"
+          placeholder="password"
+          value={ password }
+          onChange={ (event) => setPassword(event.target.value) }
+          className="login_input"
+        />
+        <button
+          type="button"
+          disabled={ isDisabled() }
+          onClick={ handleSubmit }
+          data-testid="common_register__button-register"
+          className="login_button"
+        >
+          Cadastrar
+        </button>
+        {
+          invalid && (
+            <div data-testid="common_register__element-invalid_register">
+              Email ou senha inválidos
+            </div>
+          )
+        }
+      </form>
+    </div>
   );
 }
 
