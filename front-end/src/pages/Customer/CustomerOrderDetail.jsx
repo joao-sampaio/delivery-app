@@ -5,6 +5,10 @@ import Header from '../../components/Header';
 import ProductCardDetail from '../../components/ProductCardDetail';
 import { getAllSellers, getSaleById, updateStatusSale } from '../../service/requests';
 
+const colors = { Pendente: '',
+  Preparando: 'yellow',
+  'Em Trânsito': 'orange',
+  Entregue: 'green' };
 function CustomerOrdersDetails() {
   const { id } = useParams();
   const [order, setOrder] = useState(false);
@@ -29,10 +33,10 @@ function CustomerOrdersDetails() {
   };
 
   return (
-    <>
+    <div className="products_page products_container">
       <Header />
       { order && (
-        <main>
+        <main className="orders_card">
           <h1>Detalhe do Pedido</h1>
           <p
             data-testid={
@@ -59,6 +63,7 @@ function CustomerOrdersDetails() {
             data-testid={
               `${prefix}__element-order-details-label-delivery-status`
             }
+            className={ colors[order.status] }
           >
             {order.status}
           </p>
@@ -67,21 +72,24 @@ function CustomerOrdersDetails() {
             disabled={ order.status !== 'Em Trânsito' }
             onClick={ async () => updateSale('Entregue') }
             data-testid={ `${prefix}__button-delivery-check` }
+            className="login_button green"
           >
             MARCAR COMO ENTREGUE
           </button>
-          {order.products.map((product, index) => (
-            <ProductCardDetail
-              key={ product.name }
-              { ...product }
-              item={ index + 1 }
-            />))}
+          <div className="products_container">
+            {order.products.map((product, index) => (
+              <ProductCardDetail
+                key={ product.name }
+                { ...product }
+                item={ index + 1 }
+              />))}
+          </div>
           <p data-testid={ `${prefix}__element-order-total-price` }>
             {`TOTAL: R$ ${order.totalPrice.replace(/\./, ',')}`}
           </p>
         </main>
       )}
-    </>
+    </div>
   );
 }
 

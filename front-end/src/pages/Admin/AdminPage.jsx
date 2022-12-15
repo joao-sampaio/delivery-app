@@ -45,15 +45,15 @@ function AdminPage() {
   };
 
   return (
-    <>
+    <div className="products_page">
       <Header />
-      <form>
+      <form className="details_form">
         <h2>Cadastrar novo usuário</h2>
         {
           invalid && (
-            <p data-testid="admin_manage__element-invalid-register">
+            <spam data-testid="admin_manage__element-invalid-register">
               Já existe um usuário usando esse endereço de email
-            </p>
+            </spam>
           )
         }
         <input
@@ -97,20 +97,22 @@ function AdminPage() {
       </form>
       <section>
         <h3>Lista de Usuários</h3>
-        {
-          users && (
-            users.map((user, index) => (
-              <UserInfo
-                key={ user.email }
-                item={ index }
-                handleDelete={ async () => handleDelete(user.email) }
-                { ...user }
-              />
-            ))
-          )
-        }
+        <div className="products_container">
+          {
+            users && (
+              users.map((user, index) => (
+                <UserInfo
+                  key={ user.email }
+                  item={ index }
+                  handleDelete={ async () => handleDelete(user.email) }
+                  { ...user }
+                />
+              ))
+            )
+          }
+        </div>
       </section>
-    </>
+    </div>
   );
 }
 

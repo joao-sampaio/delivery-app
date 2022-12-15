@@ -12,19 +12,25 @@ function Checkout() {
   }, []);
 
   return (
-    <>
+    <div className="products_page">
       <Header />
-      <h1>Finalizar Pedido</h1>
-      <OrderTable
-        productsList={ productsList }
-        totalPrice={ totalPrice }
-        setProductsList={ setProductsList }
-      />
-      <OrderDetails
-        productsList={ productsList }
-        totalPrice={ totalPrice }
-      />
-    </>
+      <div className="">
+        <h1>Finalizar Pedido</h1>
+        <div className="receipt">
+          <OrderTable
+            productsList={ productsList }
+            totalPrice={ totalPrice }
+            setProductsList={ setProductsList }
+          />
+        </div>
+        <div className="details_form">
+          <OrderDetails
+            productsList={ productsList }
+            totalPrice={ totalPrice }
+          />
+        </div>
+      </div>
+    </div>
   );
 }
 

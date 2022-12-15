@@ -56,23 +56,25 @@ function OrderDetails({ productsList, totalPrice }) {
           </select>
         </label>
         <label htmlFor="input-address">
-          Endereço
+          Endereço:
           <input
             id="input-address"
             data-testid="customer_checkout__input-address"
             type="text"
             value={ deliveryAddress }
             onChange={ ({ target }) => setDeliveryAddress(target.value) }
+            className="address"
           />
         </label>
         <label htmlFor="input-address-number">
-          Número
+          Número:
           <input
             id="input-address-number"
             data-testid="customer_checkout__input-address-number"
             type="number"
             value={ deliveryNumber }
             onChange={ ({ target }) => setDeliveryNumber(target.value) }
+            className="number"
           />
         </label>
         <button
@@ -80,6 +82,7 @@ function OrderDetails({ productsList, totalPrice }) {
           type="button"
           onClick={ finishOrder }
           disabled={ currentSeller === '0' || deliveryAddress === '' }
+          className="login_button"
         >
           FINALIZAR PEDIDO
         </button>

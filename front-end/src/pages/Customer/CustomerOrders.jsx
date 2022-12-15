@@ -16,12 +16,12 @@ function CustomerOrders() {
   }, []);
 
   return (
-    <>
+    <div className="products_page">
       <Header />
-      <main>
+      <main className="products_container">
         { products.map((sale) => <CardSale key={ sale.id } { ...sale } />)}
       </main>
-    </>
+    </div>
   );
 }
 

@@ -27,10 +27,10 @@ function SellerOrdersDetails() {
   };
 
   return (
-    <>
+    <div className="products_page  products_container">
       <Header />
       { order && (
-        <main>
+        <main className="orders_card">
           <p data-testid="seller_order_details__element-order-details-label-order-id">
             PEDIDO
             {' '}
@@ -49,6 +49,7 @@ function SellerOrdersDetails() {
             disabled={ order.status !== 'Pendente' }
             onClick={ async () => updateSale('Preparando') }
             data-testid="seller_order_details__button-preparing-check"
+            className="login_button yellow"
           >
             Preparar pedido
           </button>
@@ -57,18 +58,21 @@ function SellerOrdersDetails() {
             data-testid="seller_order_details__button-dispatch-check"
             onClick={ async () => updateSale('Em Trânsito') }
             disabled={ order.status !== 'Preparando' }
+            className="login_button green"
           >
             Saiu para entrega
           </button>
-          {
-            order.products
-              .map((product, index) => (
-                <ProductCardDetail
-                  key={ product.name }
-                  { ...product }
-                  item={ index + 1 }
-                />))
-          }
+          <div className="products_container">
+            {
+              order.products
+                .map((product, index) => (
+                  <ProductCardDetail
+                    key={ product.name }
+                    { ...product }
+                    item={ index + 1 }
+                  />))
+            }
+          </div>
           <p>
             {' '}
             TOTAL: R$
@@ -79,7 +83,7 @@ function SellerOrdersDetails() {
           </p>
         </main>
       )}
-    </>
+    </div>
   );
 }
 

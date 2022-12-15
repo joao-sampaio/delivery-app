@@ -2,13 +2,17 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+const colors = { Pendente: '',
+  Preparando: 'yellow',
+  'Em Trânsito': 'orange',
+  Entregue: 'green' };
 function CardSale({ id,
   totalPrice, deliveryAddress, deliveryNumber, saleDate, status }) {
   const { role } = JSON.parse(localStorage.getItem('user'));
 
   return (
     <Link to={ `/${role}/orders/${id}` }>
-      <section>
+      <section className={ `users_card ${colors[status]}` }>
         <p data-testid={ `${role}_orders__element-order-id-${id}` }>{id}</p>
         <p data-testid={ `${role}_orders__element-delivery-status-${id}` }>{status}</p>
         <p data-testid={ `${role}_orders__element-order-date-${id}` }>

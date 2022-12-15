@@ -1,8 +1,13 @@
 import PropTypes from 'prop-types';
 
+const roles = { administrator: 'adm',
+  admin: 'adm',
+  seller: 'seller',
+  customer: 'customer' };
 function UserInfo({ name, email, role, item, handleDelete }) {
+  // const classN = "user_card" + roles[role]
   return (
-    <div>
+    <div className={ `users_card ${roles[role]}` }>
       <p data-testid={ `admin_manage__element-user-table-item-number-${item}` }>{item}</p>
       <p data-testid={ `admin_manage__element-user-table-name-${item}` }>{name}</p>
       <p data-testid={ `admin_manage__element-user-table-email-${item}` }>{email}</p>
@@ -11,6 +16,7 @@ function UserInfo({ name, email, role, item, handleDelete }) {
         data-testid={ `admin_manage__element-user-table-remove-${item}` }
         type="button"
         onClick={ handleDelete }
+        className="users_button"
       >
         Excluir
       </button>

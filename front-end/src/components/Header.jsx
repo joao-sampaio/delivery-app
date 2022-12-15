@@ -27,7 +27,7 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className="header">
       <ul>
         { role === 'customer' && (
           <li>
@@ -57,6 +57,7 @@ function Header() {
             data-testid="customer_products__element-navbar-link-logout"
             type="button"
             onClick={ logout }
+            className="header_button"
           >
             Sair
           </button>
