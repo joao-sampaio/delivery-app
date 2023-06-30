@@ -4,12 +4,13 @@ import axios from 'axios';
 export const api = axios.create({
   // baseURL: 'http://localhost:3001',
   baseURL: 'https://delivery-app-api-ocnj.onrender.com/',
-  headers: {'Access-Control-Allow-Origin': 'https://drinkdelivery.vercel.app'},
+  // headers: {'Access-Control-Allow-Origin': 'https://drinkdelivery.vercel.app'},
 });
 
 api.interceptors.request.use((config) => {
   const user = JSON.parse(localStorage.getItem('user'));
   config.headers.Authorization = user ? user.token : '';
+  config.headers['Access-Control-Allow-Origin'] = 'https://drinkdelivery.vercel.app';
   return config;
 });
 
