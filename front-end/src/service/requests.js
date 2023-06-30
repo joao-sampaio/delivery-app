@@ -10,7 +10,6 @@ export const api = axios.create({
 api.interceptors.request.use((config) => {
   const user = JSON.parse(localStorage.getItem('user'));
   config.headers.Authorization = user ? user.token : '';
-  config.headers['Access-Control-Allow-Origin'] = 'https://drinkdelivery.vercel.app';
   return config;
 });
 
