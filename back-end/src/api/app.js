@@ -6,6 +6,7 @@ const app = express();
 
 const corsOptions = {
     origin: 'https://drinkdelivery.vercel.app',
+    allowedHeaders:  'GET,HEAD,PUT,PATCH,POST,DELETE',
     optionsSuccessStatus: 200
   }
 
