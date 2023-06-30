@@ -5,7 +5,7 @@ const { userRouter, productRouter, salesRouter } = require('../database/routers'
 const app = express();
 
 const corsOptions = {
-    origin: 'https://drinkdelivery.vercel.app/login',
+    origin: 'https://drinkdelivery.vercel.app',
     optionsSuccessStatus: 200
   }
 

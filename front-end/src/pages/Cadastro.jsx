@@ -66,8 +66,8 @@ function Cadastro({ history }) {
         </button>
         {
           invalid && (
-            <div data-testid="common_register__element-invalid_register">
-              Email ou senha inválidos
+            <div className='span_msg' data-testid="common_register__element-invalid_register">
+              <p>Email ou senha inválidos</p>
             </div>
           )
         }
