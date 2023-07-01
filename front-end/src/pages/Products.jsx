@@ -97,6 +97,8 @@ function Products() {
                 <input
                   id={ i }
                   type="number"
+                  min={0}
+                  max={99}
                   data-testid={ `customer_products__input-card-quantity-${p.id}` }
                   onChange={ changeQuantity }
                   value={ itemQuantities[i] ? itemQuantities[i] : 0 }
