@@ -13,7 +13,8 @@ const suffix = {
 const databaseName = environment === 'production' ?
 process.env.MYSQL_DB_NAME : `${suffix[environment] || suffix.test}`
 
-console.log(process.env)
+// console.log(process.env)
+// which npx && npm run db:reset && 
 
 const options = {
   host: process.env.HOSTNAME || process.env.MYSQL_HOST || 'localhost',
