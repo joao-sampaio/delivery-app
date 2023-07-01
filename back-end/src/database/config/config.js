@@ -13,7 +13,6 @@ const suffix = {
 const databaseName = environment === 'production' ?
 process.env.MYSQL_DB_NAME : `${suffix[environment] || suffix.test}`
 
-// console.log(process.env)
 // which npx && npm run db:reset && 
 
 const options = {
@@ -28,6 +27,8 @@ const options = {
   },
   logging: false,
 };
+
+console.log(options)
 
 module.exports = {
   development: {
