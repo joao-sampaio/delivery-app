@@ -5,18 +5,15 @@ const { userRouter, productRouter, salesRouter } = require('../database/routers'
 const app = express();
 
 const corsOptions = {
-    origin: 'https://drinkdelivery.vercel.app',
-    allowedHeaders:  'Content-Type,Authorization',
-    credentials: true,
-    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+    // origin: 'https://drinkdelivery.vercel.app',
+    origin: '*',
+    // allowedHeaders:  'Content-Type,Authorization',
+    // credentials: true,
+    // methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
     optionsSuccessStatus: 200
   }
 
 app.use(cors(corsOptions));
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://drinkdelivery.vercel.app");
-  next();
-});
 
 app.use(express.json());
 app.use(express.static('public'));
