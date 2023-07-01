@@ -13,8 +13,6 @@ const suffix = {
 const databaseName = environment === 'production' ?
 process.env.MYSQL_DB_NAME : `${suffix[environment] || suffix.test}`
 
-// which npx && npm run db:reset && 
-
 const options = {
   host: process.env.HOSTNAME || process.env.MYSQL_HOST || 'localhost',
   port: process.env.MYSQL_PORT || '3306',
@@ -27,8 +25,6 @@ const options = {
   },
   logging: false,
 };
-
-console.log(options)
 
 module.exports = {
   development: {
